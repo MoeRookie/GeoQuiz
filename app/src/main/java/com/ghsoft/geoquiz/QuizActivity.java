@@ -25,6 +25,8 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         mQuestionTextView = findViewById(R.id.tv_question);
+        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(question);
         mTrueButton = findViewById(R.id.btn_true);
         mFalseButton = findViewById(R.id.btn_false);
         mNextButton = findViewById(R.id.btn_next);
