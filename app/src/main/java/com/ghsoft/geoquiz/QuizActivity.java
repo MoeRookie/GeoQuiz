@@ -25,8 +25,6 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         mQuestionTextView = findViewById(R.id.tv_question);
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
-        mQuestionTextView.setText(question);
         mTrueButton = findViewById(R.id.btn_true);
         mFalseButton = findViewById(R.id.btn_false);
         mNextButton = findViewById(R.id.btn_next);
@@ -49,9 +47,17 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 切换显示不同的问题内容
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                int question = mQuestionBank[mCurrentIndex].getTextResId();
-                mQuestionTextView.setText(question);
+                updateQuestion();
             }
         });
+        updateQuestion();
+    }
+
+    /**
+     * 更新显示问题
+     */
+    private void updateQuestion() {
+        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(question);
     }
 }
