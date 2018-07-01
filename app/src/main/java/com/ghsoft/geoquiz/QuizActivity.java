@@ -44,5 +44,14 @@ public class QuizActivity extends AppCompatActivity {
                         , Toast.LENGTH_SHORT).show();
             }
         });
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 切换显示不同的问题内容
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                int question = mQuestionBank[mCurrentIndex].getTextResId();
+                mQuestionTextView.setText(question);
+            }
+        });
     }
 }
