@@ -10,6 +10,10 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     // 挑战练习
     // 2.9 添加后退按钮
+        // 1.在布局文件中添加后退按钮
+        // 2.添加后退按钮所需的向左箭头
+        // 3.点击显示上一道测试题目(与点击next按钮时显示下一道测试题目的效果是相同的)
+            // 3.1 -1
     // 2.10 从按钮到图标按钮
     private Button mTrueButton;
     private Button mFalseButton;
@@ -52,14 +56,14 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
         // 2.8 为TextView添加监听器
-        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
                 // 切换显示不同的问题内容
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
-            }
-        });
+//                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+//                updateQuestion();
+//            }
+//        });
         updateQuestion();
     }
 
