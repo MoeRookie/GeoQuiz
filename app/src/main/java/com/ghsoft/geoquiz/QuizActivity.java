@@ -31,15 +31,13 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(QuizActivity.this, R.string.incorrect_toast
-                        , Toast.LENGTH_SHORT).show();
+                checkAnswer(true);
             }
         });
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(QuizActivity.this, R.string.correct_toast
-                        , Toast.LENGTH_SHORT).show();
+                checkAnswer(false);
             }
         });
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -59,5 +57,23 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+    }
+
+    /**
+     * 检查用户给出的答案
+     * @param userPressedTrue 用户的选择
+     */
+    private void checkAnswer(boolean userPressedTrue){
+        // 获取当前问题的答案
+        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+        // 比对用户给出的答案和问题的答案
+        int messageResId = 0;
+        if (userPressedTrue == answerIsTrue) {
+            messageResId = R.string.correct_toast;
+        } else {
+            messageResId = R.string.incorrect_toast;
+        }
+        // 弹出提示用户选择正误的提示
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 }
