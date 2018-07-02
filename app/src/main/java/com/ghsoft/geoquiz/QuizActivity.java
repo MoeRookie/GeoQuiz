@@ -8,6 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
+    // 挑战练习
+    // 2.9 添加后退按钮
+    // 2.10 从按钮到图标按钮
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
@@ -41,6 +44,15 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
         mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 切换显示不同的问题内容
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+        // 2.8 为TextView添加监听器
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 切换显示不同的问题内容
