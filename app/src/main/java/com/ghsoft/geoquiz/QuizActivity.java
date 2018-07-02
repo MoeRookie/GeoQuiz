@@ -4,15 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     // 挑战练习
     // 2.10 从按钮到图标按钮
+    // Button -> ImageButton
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
+    private ImageButton mNextButton;
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans,true),
@@ -22,7 +24,7 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_asia,true),
     };
     private int mCurrentIndex = 0;
-    private Button mPreButton;
+    private ImageButton mPreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +56,14 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
         // 2.8 为TextView添加监听器
-//        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 // 切换显示不同的问题内容
-//                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-//                updateQuestion();
-//            }
-//        });
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
         // 2.9 添加后退按钮
         mPreButton.setOnClickListener(new View.OnClickListener() {
             @Override
