@@ -5,6 +5,7 @@
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
     <string name="next_button">NEXT</string>
+    <string name="pre_button">PREV</string>
 
     <string name="question_oceans">
         1.The Pacific Oecan is larger than the Atlantic Ocean.
