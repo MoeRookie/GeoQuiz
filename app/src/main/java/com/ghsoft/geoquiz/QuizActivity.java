@@ -9,11 +9,6 @@ import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     // 挑战练习
-    // 2.9 添加后退按钮
-        // 1.在布局文件中添加后退按钮
-        // 2.添加后退按钮所需的向左箭头
-        // 3.点击显示上一道测试题目(与点击next按钮时显示下一道测试题目的效果是相同的)
-            // 3.1 -1
     // 2.10 从按钮到图标按钮
     private Button mTrueButton;
     private Button mFalseButton;
@@ -27,6 +22,8 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_asia,true),
     };
     private int mCurrentIndex = 0;
+    private Button mPreButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +32,7 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton = findViewById(R.id.btn_true);
         mFalseButton = findViewById(R.id.btn_false);
         mNextButton = findViewById(R.id.btn_next);
+        mPreButton = findViewById(R.id.btn_pre);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +62,25 @@ public class QuizActivity extends AppCompatActivity {
 //                updateQuestion();
 //            }
 //        });
+        // 2.9 添加后退按钮
+        mPreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 切换显示不同的问题内容
+                // 点击后为-
+                /**
+                 * 点击之后,先减(别忘了赋值)
+                 * 减的话,点击一次只减一次就得了
+                 */
+                if (--mCurrentIndex < 0) {
+                    mCurrentIndex = mQuestionBank.length - Math.abs(mCurrentIndex);
+                } else {
+                    // 点击后为+
+                    mCurrentIndex %= mQuestionBank.length;
+                }
+                updateQuestion();
+            }
+        });
         updateQuestion();
     }
 
