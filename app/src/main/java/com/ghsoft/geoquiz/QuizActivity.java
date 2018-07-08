@@ -117,6 +117,13 @@ public class QuizActivity extends AppCompatActivity {
     }
     // 3,覆盖更多生命周期方法
 
+    /**
+     * 1.当点击返回键时,最终回调了onDestroy()方法:这是因为单击设备的后退键,相当于告诉系统我已经完成Activity的
+     *  使用了,现在不需要它了,那么这个时候系统就会把当前Activity从返回栈中清除出去,所以回调了onDestroy()方法;
+     * 2.运处于行状态的应用,点击主屏幕键,Activity消失却没有回调onDestroy()方法:这是因为单击主屏幕键,相当于通知
+     *  Android,我去别处看看,稍后可能回来;此时为快速响应并返回应用,Android只是暂停了当前的Activity而并没有销毁它;
+     * 3.所以,当我在任务管理器再次点击应用图标时,并没有当前Activity的一个创建过程,而是直接启动应用并运行了;
+     */
     @Override
     protected void onStart() {
         super.onStart();
