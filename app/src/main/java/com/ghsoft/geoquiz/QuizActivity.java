@@ -2,6 +2,7 @@ package com.ghsoft.geoquiz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
+    // 1,新增TAG常量
+    private static final String TAG = QuizActivity.class.getSimpleName();
     // 挑战练习
     // 2.10 从按钮到图标按钮
     // Button -> ImageButton
@@ -25,10 +28,11 @@ public class QuizActivity extends AppCompatActivity {
     };
     private int mCurrentIndex = 0;
     private ImageButton mPreButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 2,添加日志输出代码
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
         mQuestionTextView = findViewById(R.id.tv_question);
         mTrueButton = findViewById(R.id.btn_true);
@@ -110,5 +114,36 @@ public class QuizActivity extends AppCompatActivity {
         }
         // 弹出提示用户选择正误的提示
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+    // 3,覆盖更多生命周期方法
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
     }
 }
