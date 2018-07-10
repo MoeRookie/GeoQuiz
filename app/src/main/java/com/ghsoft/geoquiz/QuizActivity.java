@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     // 1,新增TAG常量
     private static final String TAG = QuizActivity.class.getSimpleName();
+    private static final String KEY_INDEX = "index";
     // 挑战练习
     // 2.10 从按钮到图标按钮
     // Button -> ImageButton
@@ -87,6 +88,10 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+        // 2,获取存储到Bundle对象中的游标变量值
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+        }
         updateQuestion();
     }
 
@@ -115,6 +120,14 @@ public class QuizActivity extends AppCompatActivity {
         // 弹出提示用户选择正误的提示
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
+    // 1,覆盖onSaveInstanceState()方法
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_INDEX,mCurrentIndex);
+    }
+
     // 3,覆盖更多生命周期方法
 
     /**
