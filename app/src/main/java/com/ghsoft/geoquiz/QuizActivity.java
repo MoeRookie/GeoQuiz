@@ -30,6 +30,8 @@ public class QuizActivity extends AppCompatActivity {
     };
     private int mCurrentIndex = 0;
     private ImageButton mPreButton;
+    private Button mCheatButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton = findViewById(R.id.btn_false);
         mNextButton = findViewById(R.id.btn_next);
         mPreButton = findViewById(R.id.btn_pre);
+        mCheatButton = findViewById(R.id.cheat_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,12 @@ public class QuizActivity extends AppCompatActivity {
                     mCurrentIndex %= mQuestionBank.length;
                 }
                 updateQuestion();
+            }
+        });
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 开启新的Activity
             }
         });
         // 2,获取存储到Bundle对象中的游标变量值
