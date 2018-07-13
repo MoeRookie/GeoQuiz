@@ -1,4 +1,5 @@
 <resources>
+    <!-- 前四章 -->
     <string name="app_name">GeoQuiz</string>
     <string name="true_button">TRUE</string>
     <string name="false_button">FALSE</string>
@@ -22,4 +23,10 @@
     <string name="question_asia">
        5.Lake Baikal is the world\'s oldest and deepest freshwater lake.
     </string>
+    <!-- 第五章 -->
+    <string name="title_activity_cheat">Cheat</string>
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgment_toast">Cheating is wrong.</string>
 </resources>
