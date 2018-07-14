@@ -1,6 +1,7 @@
 package com.ghsoft.geoquiz;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,6 +97,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 开启新的Activity
+                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                startActivity(intent);
             }
         });
         // 2,获取存储到Bundle对象中的游标变量值
