@@ -97,7 +97,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 开启新的Activity
-                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                boolean answerTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerTrue);
                 startActivity(intent);
             }
         });
