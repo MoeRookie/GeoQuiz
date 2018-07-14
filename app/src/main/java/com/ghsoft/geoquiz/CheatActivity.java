@@ -26,10 +26,18 @@ public class CheatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 获取extra中问题的答案
-
+                boolean answerTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+                mAnswerTextView.setText(answerTrue?R.string.true_button:R.string.false_button);
             }
         });
     }
+
+    /**
+     * 创建intent
+     * @param packageContext 启动方上下文对象
+     * @param extra 传递到当前activity的值
+     * @return 新的intent
+     */
     public static Intent newIntent(Context packageContext,boolean extra){
         Intent intent = new Intent(packageContext, CheatActivity.class);
         intent.putExtra(EXTRA_ANSWER_IS_TRUE,extra);
