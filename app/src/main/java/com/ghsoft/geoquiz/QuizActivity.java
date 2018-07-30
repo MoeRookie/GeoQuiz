@@ -15,6 +15,7 @@ public class QuizActivity extends AppCompatActivity {
     // 1,新增TAG常量
     private static final String TAG = QuizActivity.class.getSimpleName();
     private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT = 0;
     // 挑战练习
     // 2.10 从按钮到图标按钮
     // Button -> ImageButton
@@ -30,6 +31,8 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_asia,true),
     };
     private int mCurrentIndex = 0;
+    // 5.新增成员变量保存CA回传的值
+    private boolean mIsCheater;
     private ImageButton mPreButton;
     private Button mCheatButton;
 
@@ -60,6 +63,7 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mIsCheater = false;
                 // 切换显示不同的问题内容
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
@@ -96,10 +100,10 @@ public class QuizActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 开启新的Activity
+                // 开启CheatActivity
                 boolean answerTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerTrue);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE_CHEAT);
             }
         });
         // 2,获取存储到Bundle对象中的游标变量值
@@ -126,10 +130,14 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         // 比对用户给出的答案和问题的答案
         int messageResId = 0;
-        if (userPressedTrue == answerIsTrue) {
-            messageResId = R.string.correct_toast;
+        if (mIsCheater) {
+            messageResId = R.string.judgment_toast;
         } else {
-            messageResId = R.string.incorrect_toast;
+            if (userPressedTrue == answerIsTrue) {
+                messageResId = R.string.correct_toast;
+            } else {
+                messageResId = R.string.incorrect_toast;
+            }
         }
         // 弹出提示用户选择正误的提示
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
@@ -141,43 +149,17 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_INDEX,mCurrentIndex);
     }
-
-    // 3,覆盖更多生命周期方法
-
-    /**
-     * 1.当点击返回键时,最终回调了onDestroy()方法:这是因为单击设备的后退键,相当于告诉系统我已经完成Activity的
-     *  使用了,现在不需要它了,那么这个时候系统就会把当前Activity从返回栈中清除出去,所以回调了onDestroy()方法;
-     * 2.运处于行状态的应用,点击主屏幕键,Activity消失却没有回调onDestroy()方法:这是因为单击主屏幕键,相当于通知
-     *  Android,我去别处看看,稍后可能回来;此时为快速响应并返回应用,Android只是暂停了当前的Activity而并没有销毁它;
-     * 3.所以,当我在任务管理器再次点击应用图标时,并没有当前Activity的一个创建过程,而是直接启动应用并运行了;
-     */
+    // 6.覆盖oAR方法获取是否看过答案的标志位
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart() called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume() called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause() called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop() called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy() called");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            if (data == null) {
+                return;
+            }
+            mIsCheater = CheatActivity.wasAnswerShown(data);
+        }
     }
 }
