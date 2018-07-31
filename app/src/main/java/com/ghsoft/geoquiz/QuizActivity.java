@@ -16,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String TAG = QuizActivity.class.getSimpleName();
     private static final String KEY_INDEX = "index";
     private static final int REQUEST_CODE_CHEAT = 0;
+    private static final String KEY_IS_CHEATER = "is_cheater";
     // 挑战练习
     // 2.10 从按钮到图标按钮
     // Button -> ImageButton
@@ -109,6 +110,7 @@ public class QuizActivity extends AppCompatActivity {
         // 2,获取存储到Bundle对象中的游标变量值
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+            mIsCheater = savedInstanceState.getBoolean(KEY_IS_CHEATER);
         }
         updateQuestion();
     }
@@ -148,6 +150,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_INDEX,mCurrentIndex);
+        outState.putBoolean(KEY_IS_CHEATER,mIsCheater);
     }
     // 6.覆盖oAR方法获取是否看过答案的标志位
     @Override
