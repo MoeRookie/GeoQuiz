@@ -36,6 +36,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean mIsCheater;
     private ImageButton mPreButton;
     private Button mCheatButton;
+    private Question mCurrentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,8 @@ public class QuizActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
             mIsCheater = savedInstanceState.getBoolean(KEY_IS_CHEATER);
+            // 设置当前问题对象的mIsCheater属性
+            mCurrentQuestion.setCheater(mIsCheater);
         }
         updateQuestion();
     }
@@ -132,7 +135,7 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         // 比对用户给出的答案和问题的答案
         int messageResId = 0;
-        if (mIsCheater) {
+        if (mCurrentQuestion.isCheater()) {
             messageResId = R.string.judgment_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -163,6 +166,10 @@ public class QuizActivity extends AppCompatActivity {
                 return;
             }
             mIsCheater = CheatActivity.wasAnswerShown(data);
+            // 获取到当前问题对象
+            mCurrentQuestion = mQuestionBank[mCurrentIndex];
+            // 设置当前问题对象的mIsCheater属性
+            mCurrentQuestion.setCheater(mIsCheater);
         }
     }
 }

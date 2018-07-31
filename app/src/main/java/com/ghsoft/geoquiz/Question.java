@@ -7,6 +7,15 @@ package com.ghsoft.geoquiz;
 public class Question {
     private int mTextResId; // 问题文本(的资源ID)
     private boolean mAnswerTrue; // 问题答案
+    private boolean mIsCheater; // 是否看过答案
+
+    public boolean isCheater() {
+        return mIsCheater;
+    }
+
+    public void setCheater(boolean cheater) {
+        mIsCheater = cheater;
+    }
 
     public Question(int textResId, boolean answerTrue) {
         mTextResId = textResId;
