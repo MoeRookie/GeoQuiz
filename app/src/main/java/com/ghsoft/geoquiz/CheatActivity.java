@@ -23,6 +23,7 @@ public class CheatActivity extends AppCompatActivity {
 
     private TextView mAnswerTextView;
     private Button mShowAnswer;
+    private TextView mTvApiLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
         mAnswerTextView = findViewById(R.id.answerTextView);
         mShowAnswer = findViewById(R.id.showAnswerButton);
+        mTvApiLevel = findViewById(R.id.tv_api_level);
+        mTvApiLevel.setText(mTvApiLevel.getText().toString() + Build.VERSION.SDK_INT);
         mShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
