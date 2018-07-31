@@ -16,6 +16,8 @@ public class CheatActivity extends AppCompatActivity {
     // 1.为extra键增加常量
     private static final String EXTRA_ANSWER_SHOWN = "com.ghsoft.geoquiz.answer_shown";
 
+    private boolean isAnswerShown;
+
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
@@ -33,8 +35,25 @@ public class CheatActivity extends AppCompatActivity {
                 mAnswerTextView.setText(answerTrue?R.string.true_button:R.string.false_button);
                 // 3.在showAnswer按钮的监听器代码中调用该方法
                 setAnswerShownResult(true);
+                isAnswerShown = true;
             }
         });
+        if (savedInstanceState == null) {
+            return;
+        }else {
+            if (!savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN)) {
+                return;
+            }else{
+                setAnswerShownResult(true);
+                isAnswerShown = false;
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(EXTRA_ANSWER_SHOWN,isAnswerShown);
     }
 
     /**
